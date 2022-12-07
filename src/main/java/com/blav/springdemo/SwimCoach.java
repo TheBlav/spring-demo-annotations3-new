@@ -20,7 +20,7 @@ public class SwimCoach implements Coach{
         return team;
     }
     @Autowired
-    @Qualifier("happyFortuneService")
+    @Qualifier("fortuneFromFile")
     private FortuneService fortuneService;
 
     @Override
