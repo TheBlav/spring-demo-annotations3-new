@@ -2,12 +2,23 @@ package com.blav.springdemo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Component
 public class TennisCoach  implements Coach{
-//    @Autowired
-//    @Qualifier("randomFortuneService")
+
+    @PostConstruct
+    public void doMyStartupStuff(){
+        System.out.println("startup stuff");
+    }
+    @PreDestroy
+    public void doMyDestructionStuff(){
+        System.out.println("Closing stuff");
+    }
     private FortuneService fortuneService;
 
     @Autowired
@@ -18,12 +29,7 @@ public class TennisCoach  implements Coach{
         this.fortuneService = fortuneService;
         System.out.println(">>Inside default constructor");
     }
-    /*
-    @Autowired
-    public void doSomeCreazyStuff(FortuneService fortuneService){
-        this.fortuneService=fortuneService;
-    }
-     */
+
 
     @Override
     public String getDailyFortune() {
