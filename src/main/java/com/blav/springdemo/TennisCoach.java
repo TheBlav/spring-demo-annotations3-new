@@ -1,5 +1,6 @@
 package com.blav.springdemo;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -9,26 +10,23 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
-public class TennisCoach  implements Coach{
+@Scope("prototype")
+public class TennisCoach  implements Coach, DisposableBean {
 
     @PostConstruct
     public void doMyStartupStuff(){
         System.out.println("startup stuff");
     }
     @PreDestroy
-    public void doMyDestructionStuff(){
-        System.out.println("Closing stuff");
+    public void doMyCleanUpStuff(){
+        System.out.println("CleanUp stuff");
     }
-    private FortuneService fortuneService;
+
 
     @Autowired
-    public TennisCoach (
-                            @Qualifier("randomFortuneService")
-                            FortuneService fortuneService )
-    {
-        this.fortuneService = fortuneService;
-        System.out.println(">>Inside default constructor");
-    }
+    @Qualifier("randomFortuneService")
+    private FortuneService fortuneService;
+
 
 
     @Override
@@ -41,6 +39,10 @@ public class TennisCoach  implements Coach{
         return "Practice your backhand volley";
     }
 
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("Inside Dstroy() method");
+    }
 //    public FortuneService getFortuneService() {
 //        return fortuneService;
 //    }
