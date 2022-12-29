@@ -12,16 +12,22 @@ public class SwimCoach implements Coach{
     @Value("${foo.team}")
     private String team;
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
-    public String getTeam(){
+    public String getTeam() {
         return team;
     }
-    @Autowired
-    @Qualifier("fortuneFromFile")
+
+    public void printData() {
+        System.out.println("Email: " + email);
+        System.out.println("Team: " + team);
+    }
     private FortuneService fortuneService;
+    public SwimCoach (FortuneService fortuneService){
+        this.fortuneService = fortuneService;
+    }
 
     @Override
     public String getDailyWorkout() {

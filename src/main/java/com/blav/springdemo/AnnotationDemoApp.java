@@ -1,14 +1,14 @@
 package com.blav.springdemo;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AnnotationDemoApp {
 
     public static void main(String[] args) {
-        // read spring config file
-        ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext
-                        ("applicationContext.xml");
+        // read spring config class
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext
+                        (SportConfig.class);
 
         // get bean from container
         Coach theCoach = context.getBean("tennisCoach", Coach.class);

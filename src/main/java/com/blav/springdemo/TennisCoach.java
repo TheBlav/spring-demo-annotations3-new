@@ -16,6 +16,7 @@ public class TennisCoach  implements Coach, DisposableBean {
     @PostConstruct
     public void doMyStartupStuff(){
         System.out.println("startup stuff");
+
     }
     @PreDestroy
     public void doMyCleanUpStuff(){

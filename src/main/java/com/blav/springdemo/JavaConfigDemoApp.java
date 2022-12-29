@@ -1,9 +1,8 @@
 package com.blav.springdemo;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class AnnotationDemoBeanScopeApp {
+public class JavaConfigDemoApp {
     public static void main(String[] args) {
         // load spring config class
         AnnotationConfigApplicationContext context =
@@ -11,14 +10,16 @@ public class AnnotationDemoBeanScopeApp {
                         (SportConfig.class);
 
         // retrieve bean from spring container
-        Coach theCoach = context.getBean("tennisCoach", Coach.class);
-        Coach alphaCoach = context.getBean("tennisCoach", Coach.class);
+        SwimCoach theCoach = context.getBean("swimCoach", SwimCoach.class);
+
 
 //        check if those beans are the same
-        System.out.println(theCoach==alphaCoach);
         System.out.println("theCoach memory location: " + theCoach);
-        System.out.println("alphaCoach memory location: " + alphaCoach);
+        System.out.println(theCoach.getDailyWorkout());
+        System.out.println(theCoach.getDailyFortune());
+        theCoach.printData();
 
+        // close Spring container
         context.close();
     }
 }
